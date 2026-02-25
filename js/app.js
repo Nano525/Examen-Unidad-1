@@ -6,14 +6,26 @@ const resultados = document.getElementById("resultados");
 const apiKey = '01a7e285f7a8418bb77f22b4be056b76';
 
 btnBuscar.addEventListener("click", ()=> {
+    if (q.value.trim() === '') {
+        alert("Porfavor ingresa un termino de busqueda");
+        return;
+    }
     console.log("q: ", q.value);
     console.log("from: ", from.value);
     console.log("to: ", to.value);
 
-    if (from.value !== '' && to.value !== '') {
+    let url = 'https://newsapi.org/v2/everything?q=' + encodeURIComponent(q.value) + '&sortBy=popularity' + '&apiKey=' + apiKey;
+
+
+    if (from.value && to.value && from.value > to.value) {
+        alert("La fecha de inicio no puede ser mayor que la fecha final");
+        return;
+    }if (from.value !== '') {
+        url += '&from=' + encodeURIComponent(from.value);
+    }if (to.value !== '') {
+        url += '&to=' + encodeURIComponent(to.value);
     }
-
-    const url = 'https://newsapi.org/v2/everything?q=' + encodeURIComponent(q.value) + '&from=' + encodeURIComponent(from.value) + '&to=' + encodeURIComponent(to.value) + '&sortBy=popularity' + '&apiKey=' + apiKey;
-
+    
+    console.log("URL: ", url);
 
 })

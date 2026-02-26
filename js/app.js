@@ -28,4 +28,15 @@ btnBuscar.addEventListener("click", ()=> {
     
     console.log("URL: ", url);
 
+    fetch(url)
+    .then(response => response.json())
+    .then(data => {
+        //Datos obtenidos de la API
+        console.log("Data: ", data);
+    })
+    .catch(error => {
+        console.error("Error al obtener las noticias: ", error);
+        alert("Ocurrió un error al obtener las noticias. Por favor intenta nuevamente.");
+    });
+
 })
